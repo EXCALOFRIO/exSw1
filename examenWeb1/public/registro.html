@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Enlaza tu archivo de estilos aquí -->
+</head>
+<body>
+    <h1>Registro</h1>
+    <form id="registrationForm" action="/registro" method="post" onsubmit="return validateForm()">
+        <label for="username">Nombre de usuario:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="confirmPassword">Confirmar contraseña:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+        <button type="submit">Registrar</button>
+    </form>
+
+    <p id="errorMessage" style="color: red; display: none;"></p>
+
+    <script src="/validation.js"></script> <!-- Enlaza tu archivo de validación del cliente aquí -->
+</body>
+</html>
