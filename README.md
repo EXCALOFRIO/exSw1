@@ -1,0 +1,19 @@
+# Apuntes Software 1
+## NODE
+### Iniciar un proyecto
+```bash
+npm init
+```
+### Instalar dependencias
+```bash
+npm install express
+```
+### Instalar dependencias de desarrollo
+```bash
+npm install -D nodemon
+```
+### Ejecutar el proyecto
+```bash
+npm run dev
+```
+# exSw1
