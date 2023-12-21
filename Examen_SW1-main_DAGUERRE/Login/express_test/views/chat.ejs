@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/chat.css' />
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="/javascripts/chat.js" defer></script>
+  </head>
+  <body>
+    <ul id="messages"></ul>
+    <form id="form">
+    	<input id="username" value= <%= user.username %> />
+        <input id="input">
+        <button>Send</button>
+    </form>
+  </body>
+</html>

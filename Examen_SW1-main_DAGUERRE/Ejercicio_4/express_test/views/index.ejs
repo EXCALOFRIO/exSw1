@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body>
+        <h1><%= title %></h1>
+        <p>Welcome to <%= title %></p>
+        <button id = "login">Login</button>
+        <h2>Lista de Texto desde el servidor:</h2>
+        <ul>
+        	<% textArray.forEach(function(element){ %>
+        		<li><%= element %></li>
+        	<% }); %>
+        </ul>
+        <h2>Lista de Imagenes desde el servidor:</h2>
+        <ul>
+        	<li><img src="<%= img%>" alt = "imagen desde el servidor"></li>
+        	<li><img src="<%= img2%>"></li>
+        </ul>
+        <script>
+            buttonLogin = document.getElementById("login");
+
+            buttonLogin.addEventListener('click', () => {
+                window.location.href = '/login';
+            });
+        </script>
+    </body>
+</html>
