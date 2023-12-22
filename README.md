@@ -26,12 +26,15 @@ npm install -D nodemon
 npm run dev
 ```
 
-alejandro.ramirezlarena@usp.ceu.es
-git config --global user.name "alejandro.ramirezlarena"
-git config --global user.email alejandro.ramirezlarena@usp.ceu.es
+### alejandro.ramirezlarena@usp.ceu.es
 
-alejandro.ramirezlarena
-116317
+### git config --global user.name "alejandro.ramirezlarena"
+
+### git config --global user.email alejandro.ramirezlarena@usp.ceu.es
+
+### alejandro.ramirezlarena
+
+### 116317
 
 # exSw1
 
