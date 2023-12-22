@@ -1,0 +1,13 @@
+<%- include("header", {}) %>
+<h1><%= title %></h1>
+<script src="validation.js"></script>
+<form id="myform" method="post" onsubmit="return validarFormulario()" action="/registro">
+    <label>Username:</label>
+    <input type="text" id="user" name="user"><br>
+    <label>Password:</label>
+    <input type="password" id="pass" name="pass"><br>
+    <label>Password:</label>
+    <input type="password" id="conf_pass" name="conf_pass"><br>
+    <button type="submit">Submit</button>
+</form>
+<%- include("footer", {}) %>
