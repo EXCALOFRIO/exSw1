@@ -23,7 +23,8 @@ npm install -D nodemon
 ### Ejecutar el proyecto
 
 ```bash
-npm run dev
+npm run start
+
 ```
 
 ### alejandro.ramirezlarena@usp.ceu.es
