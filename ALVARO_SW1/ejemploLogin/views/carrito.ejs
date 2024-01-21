@@ -1,0 +1,10 @@
+<%- include("header", {}) %>
+<h2>CARRITO:</h2>
+
+<ul>
+  <% user.carrito.forEach(producto => { %>
+  <li><%= producto %></li>
+  <% }); %>
+</ul>
+
+<%- include("footer", {}) %>
