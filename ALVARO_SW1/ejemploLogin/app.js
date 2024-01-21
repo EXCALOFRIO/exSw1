@@ -8,9 +8,10 @@ const session = require('express-session');
 const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
 const restrictedRouter = require('./routes/restricted');
+const carritoRouter = require('./routes/carrito');
 
 const app = express();
-app.locals.title = "Demo Login";
+app.locals.title = "Tu tienda de productos robados por negros de confianza";
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -25,28 +26,34 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
-app.use((req,res,next) => {
+app.use((req, res, next) => {
   const message = req.session.message;
   const error = req.session.error;
   delete req.session.message;
   delete req.session.error;
   res.locals.message = "";
   res.locals.error = "";
-  if(message) res.locals.message = `<p>${message}</p>`;
-  if(error) res.locals.error = `<p>${error}</p>`;
+  if (message) res.locals.message = `<p>${message}</p>`;
+  if (error) res.locals.error = `<p>${error}</p>`;
   next();
 });
 
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
+app.use('/carrito', restricted, carritoRouter);
 app.use('/restricted', restricted, restrictedRouter);
-app.use('/logout', (req,res) =>{
+app.use("/logout", (req, res) => {
   req.session.destroy();
   res.redirect("/");
 });
 
-function restricted(req, res, next){
-  if(req.session.user){
+app.use('/logout2', (req, res) => {
+  req.session.destroy();
+  res.redirect("/");
+});
+
+function restricted(req, res, next) {
+  if (req.session.user) {
     next();
   } else {
     res.redirect("login");
@@ -54,12 +61,12 @@ function restricted(req, res, next){
 }
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

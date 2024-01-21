@@ -1,4 +1,16 @@
 <%- include("header", {}) %>
 <h1>Restricted</h1>
-<p>Only accessible if logged.</p>
+<h2>Catalogo de Productos</h2>
+<ul>
+  <% productos.forEach(product => { %>
+  <li>
+    <strong><%= product.nombre %></strong> - <%= product.precio %> €
+    <form action="/carrito" method="post">
+      <input type="hidden" name="producto" value="<%= product.nombre %>" />
+      <input type="hidden" name="precio" value="<%= product.precio %>" />
+      <button type="submit">Agregar al carrito</button>
+    </form>
+  </li>
+  <% }); %>
+</ul>
 <%- include("footer", {}) %>
