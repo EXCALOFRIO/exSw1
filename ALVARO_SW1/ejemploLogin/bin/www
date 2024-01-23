@@ -9,18 +9,42 @@ var debug = require('debug')('ejemplologin:server');
 var http = require('http');
 const database = require('../database');
 
+
+const socketIO = require('socket.io');
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '6969');
+var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+const server = http.createServer(app);
+const io = socketIO(server);
+
+
+
+// Manejar conexiones de socket
+io.on('connection', (socket) => {
+  console.log('Usuario conectado');
+
+  // Manejar mensajes del cliente
+  socket.on('chat message', (msg) => {
+    // Puedes guardar el mensaje en la base de datos si es necesario
+    chat.addMessage(msg);
+
+    // Enviar el mensaje a todos los clientes conectados
+    io.emit('chat message', msg);
+  });
+
+  // Manejar desconexiones de socket
+  socket.on('disconnect', () => {
+    console.log('Usuario desconectado');
+  });
+});
 
 /**
  * Listen on provided port, on all network interfaces.

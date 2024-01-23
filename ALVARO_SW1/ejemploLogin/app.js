@@ -9,6 +9,8 @@ const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
 const restrictedRouter = require('./routes/restricted');
 const carritoRouter = require('./routes/carrito');
+const eliminarCarritoRouter = require('./routes/eliminarCarrito');
+const chatRouter = require('./routes/chat');
 
 const app = express();
 app.locals.title = "Tu tienda de productos robados por negros de confianza";
@@ -41,7 +43,9 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/carrito', restricted, carritoRouter);
+app.use('/eliminarCarrito', restricted, eliminarCarritoRouter);
 app.use('/restricted', restricted, restrictedRouter);
+app.use('/chat', restricted, chatRouter);
 app.use("/logout", (req, res) => {
   req.session.destroy();
   res.redirect("/");
