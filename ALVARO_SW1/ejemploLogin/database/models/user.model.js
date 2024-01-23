@@ -26,6 +26,10 @@ users.register = function (username, password, carrito = []) {
     });
 }
 
+users.isUsernameTaken = function (username) {
+    return users.data.hasOwnProperty(username);
+}
+
 users.isLoginRight = async function (username, password) {
     if (!users.data.hasOwnProperty(username)) {
         return false;

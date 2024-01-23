@@ -1,0 +1,9 @@
+<%- include("header", {}) %>
+<h1>Register</h1>
+<form method="post" action="/register">
+  <label>Username: </label> <input type="text" name="user"><br>
+  <label>Password: </label> <input type="password" name="pass"><br>
+  <label>Confirma contraseña: </label> <input type="password" name="pass2"><br></br>
+  <button type="submit">Registrar</button>
+</form>
+<%- include("footer", {}) %>

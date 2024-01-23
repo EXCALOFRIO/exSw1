@@ -1,11 +1,15 @@
 <%- include("header", {}) %>
 <h2>CARRITO:</h2>
 
+<% if (user.carrito && user.carrito.length > 0) { %>
 <ul>
   <% user.carrito.forEach(producto => { %>
   <li><%= producto %></li>
   <% }); %>
 </ul>
+<% } else { %>
+<p>No hay productos en el carrito.</p>
+<% } %>
 
 <form action="/eliminarCarrito" method="POST">
   <button type="submit">Eliminar Carrito</button>

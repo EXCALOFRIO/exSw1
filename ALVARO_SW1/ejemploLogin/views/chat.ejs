@@ -1,8 +1,8 @@
+<%- include("header", {}) %>
 <!DOCTYPE html>
 <html>
   <head>
     <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/chat.css" />
     <script src="/socket.io/socket.io.js" defer></script>
     <script src="/js/chat.js" defer></script>
   </head>
@@ -14,3 +14,4 @@
     </form>
   </body>
 </html>
+<%- include("footer", {}) %>

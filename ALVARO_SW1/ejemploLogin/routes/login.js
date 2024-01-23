@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const database = require('../database');
 const database2 = require('../database/models/user.model');
+
 router.get('/', function (req, res, next) {
   res.render('login', { user: req.session.user });
 });

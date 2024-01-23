@@ -3,8 +3,11 @@ body {
   background-color: #f4f4f4;
   margin: 0;
   padding: 0;
-  position: relative; /* Agrega esta propiedad para que el popup se posicione correctamente */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Asegura que el cuerpo ocupa al menos la altura completa de la ventana */
 }
+
 header {
   background-color: #333;
   color: #fff;
@@ -20,9 +23,6 @@ h2 {
 ul {
   list-style-type: none;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  grid-gap: 20px;
 }
 
 li {
@@ -30,6 +30,7 @@ li {
   padding: 15px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* Agrega margen inferior entre elementos */
 }
 
 form {
@@ -62,11 +63,12 @@ footer {
 .welcome-message {
   text-align: right;
   padding: 10px;
-  background-color: #ec0a029b; /* Puedes cambiar el color de fondo según tu preferencia */
+  background-color: #ec0a029b;
   color: white;
-  float: right; /* Añade esta propiedad para alinear a la derecha */
-  margin-left: 30px; /* Añade margen izquierdo de 10px */
+  float: right;
+  margin-left: 30px;
 }
+
 .cookie-popup {
   position: fixed;
   bottom: 0;
@@ -74,7 +76,7 @@ footer {
   width: 100%;
   background-color: #d0d0d0;
   box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 9999; /* Asegura que el popup esté por encima de todo */
+  z-index: 9999;
 }
 
 .cookie-content {
@@ -89,5 +91,18 @@ footer {
 }
 
 .cookie-buttons form {
-  margin: 0 10px; /* Espaciado entre los formularios de botones */
+  margin: 0 10px;
+}
+
+#messages {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 10px; /* Ajusta el margen inferior según sea necesario */
+}
+
+#form {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 10px; /* Ajusta el margen inferior según sea necesario */
 }

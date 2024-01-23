@@ -7,6 +7,7 @@ const session = require('express-session');
 
 const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
+const registerRouter = require('./routes/register');
 const restrictedRouter = require('./routes/restricted');
 const carritoRouter = require('./routes/carrito');
 const eliminarCarritoRouter = require('./routes/eliminarCarrito');
@@ -44,6 +45,7 @@ app.use((req, res, next) => {
 
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
+app.use('/register', registerRouter);
 app.use('/carrito', restricted, carritoRouter);
 app.use('/eliminarCarrito', restricted, eliminarCarritoRouter);
 app.use('/restricted', restricted, restrictedRouter);
