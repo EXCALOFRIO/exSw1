@@ -10,6 +10,8 @@ const loginRouter = require('./routes/login');
 const restrictedRouter = require('./routes/restricted');
 const carritoRouter = require('./routes/carrito');
 const eliminarCarritoRouter = require('./routes/eliminarCarrito');
+const cookiesAceptarRouter = require('./routes/cookiesAceptar');
+const cookiesRechazarRouter = require('./routes/cookiesRechazar');
 const chatRouter = require('./routes/chat');
 
 const app = express();
@@ -46,6 +48,8 @@ app.use('/carrito', restricted, carritoRouter);
 app.use('/eliminarCarrito', restricted, eliminarCarritoRouter);
 app.use('/restricted', restricted, restrictedRouter);
 app.use('/chat', restricted, chatRouter);
+app.use('/cookiesAceptar', cookiesAceptarRouter);
+app.use('/cookiesRechazar', cookiesRechazarRouter);
 app.use("/logout", (req, res) => {
   req.session.destroy();
   res.redirect("/");

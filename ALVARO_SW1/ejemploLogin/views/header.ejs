@@ -43,3 +43,20 @@
 
       </div>
     </nav>
+    <% if (user && (!user.cookies || (user.cookies !== true ))) { %>
+      <div class="cookie-popup" id="cookiePopup">
+        <div class="cookie-content">
+          <p>Este sitio web utiliza cookies para mejorar la experiencia del usuario. Al continuar navegando, aceptas el uso de cookies.</p>
+          <div class="cookie-buttons">
+            <form action="/cookiesAceptar" method="POST">
+              <button type="submit" class="btn btn-primary">Aceptar</button>
+              <input type="hidden" name="cookie" value="true">
+            </form>
+            <form action="/cookiesRechazar" method="POST">
+              <button type="submit" class="btn btn-primary">Rechazar</button>
+              <input type="hidden" name="cookie" value="false">
+            </form>
+          </div>
+        </div>
+      </div>
+    <% } %>

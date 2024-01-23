@@ -1,4 +1,6 @@
 const bcrypt = require('bcrypt');
+const { use } = require('../../routes');
+const { user } = require('..');
 
 users = {};
 
@@ -44,5 +46,21 @@ users.getCart = function (username) {
     }
     return users.data[username].carrito;
 }
+
+users.aceptarCookies = function (username, cookies) {
+    console.log('cookies en aceptarCookies:', cookies);
+    if (!users.data.hasOwnProperty(username)) {
+        throw new Error(`No existe el usuario ${username}.`);
+    }
+    users.data[username].cookies = cookies;
+}
+
+users.getCookies = function (username) {
+    if (!users.data.hasOwnProperty(username)) {
+        throw new Error(`No existe el usuario ${username}.`);
+    }
+    return users.data[username].cookies;
+}
+
 
 module.exports = users;

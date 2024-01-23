@@ -12,10 +12,13 @@ router.post('/', async (req, res) => {
     req.session.user = { username: user };
     // Obtener el carrito del usuario desde la base de datos
     const carrito = await database2.getCart(req.session.user.username);
+    const cookies = await database2.getCookies(req.session.user.username);
     // Guardar el carrito en la sesión
     req.session.user.carrito = carrito || [];
-    
+    req.session.user.cookies = cookies || false;
+
     req.session.message = "¡Login correcto!"
+    console.log('Sesión del usuario antes de renderizar la vista:', req.session.user);
     res.redirect("restricted");
   } else {
     req.session.error = "Incorrect username or password.";

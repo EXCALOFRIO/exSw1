@@ -3,8 +3,8 @@ body {
   background-color: #f4f4f4;
   margin: 0;
   padding: 0;
+  position: relative; /* Agrega esta propiedad para que el popup se posicione correctamente */
 }
-
 header {
   background-color: #333;
   color: #fff;
@@ -58,6 +58,7 @@ footer {
   bottom: 0;
   width: 100%;
 }
+
 .welcome-message {
   text-align: right;
   padding: 10px;
@@ -65,4 +66,28 @@ footer {
   color: white;
   float: right; /* Añade esta propiedad para alinear a la derecha */
   margin-left: 30px; /* Añade margen izquierdo de 10px */
+}
+.cookie-popup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #d0d0d0;
+  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999; /* Asegura que el popup esté por encima de todo */
+}
+
+.cookie-content {
+  padding: 15px;
+  text-align: center;
+}
+
+.cookie-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.cookie-buttons form {
+  margin: 0 10px; /* Espaciado entre los formularios de botones */
 }
