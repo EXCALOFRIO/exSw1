@@ -10,11 +10,12 @@ var http = require('http');
 const database = require('../database');
 const { Server } = require("socket.io");
 
+const puerto = 6969;
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || puerto);
 app.set('port', port);
 
 /**

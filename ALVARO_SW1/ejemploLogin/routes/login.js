@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
 
     req.session.message = "¡Login correcto!"
     console.log('Sesión del usuario antes de renderizar la vista:', req.session.user);
-    res.redirect("restricted");
+    res.redirect("/");
   } else {
     req.session.error = "Incorrect username or password.";
     res.redirect("login");

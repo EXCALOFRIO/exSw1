@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
         await database2.saveCart(req.session.user.username, req.session.user.carrito);
         // Respuesta al cliente
         console.log('Sesión del usuario antes de renderizar la vista:', req.session.user);
-        res.render('carrito', { carrito: req.session.user.carrito || [], user: req.session.user });
+        res.redirect("/restricted");
 
     } catch (error) {
         // Manejar el error si hay un problema al guardar el carrito
