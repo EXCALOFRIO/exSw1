@@ -5,7 +5,8 @@ const router = express.Router();
 
 // Ruta para rexchazar las cookies
 router.post('/', (req, res) => {
-
+    req.session.destroy();
+    req.app.locals.cookies = false;
     //redirigir a google    
     res.redirect('https://www.google.com');
 });

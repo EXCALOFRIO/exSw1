@@ -4,7 +4,8 @@ const database = require('../database');
 const database2 = require('../database/models/user.model');
 
 router.get('/', function (req, res, next) {
-    res.render('register', { user: req.session.user });
+    res.render('register', { user: req.session.user, req: req });
+    console.log(req.app.locals.cookies);
 });
 
 router.post('/', async (req, res) => {
@@ -21,6 +22,7 @@ router.post('/', async (req, res) => {
             await database2.register(user, pass);
             req.session.user = { username: user };
             req.session.message = "¡Registro correcto!"
+            req.session.user.cookies = req.app.locals.cookies;
             console.log('Sesión del usuario antes de renderizar la vista:', req.session.user);
             //haz un post para iniqciar sesion pasandole el usuario y la contraseña
             res.redirect("/");

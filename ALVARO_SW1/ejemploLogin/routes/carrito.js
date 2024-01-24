@@ -12,7 +12,7 @@ router.get('/', function (req, res) {
         const carrito = database2.getCart(username);
 
         // Renderizar la vista con el carrito
-        res.render('carrito', { carrito: carrito || [], user: req.session.user });
+        res.render('carrito', { carrito: carrito || [], user: req.session.user, req: req });
     } catch (error) {
         // Manejar el error si el usuario no existe
         console.error(error.message);

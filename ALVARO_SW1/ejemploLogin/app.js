@@ -17,6 +17,7 @@ const chatRouter = require('./routes/chat');
 
 const app = express();
 app.locals.title = "Tu tienda de productos robados por negros de confianza";
+app.locals.cookies = false;
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -52,13 +53,17 @@ app.use('/restricted', restricted, restrictedRouter);
 app.use('/chat', restricted, chatRouter);
 app.use('/cookiesAceptar', cookiesAceptarRouter);
 app.use('/cookiesRechazar', cookiesRechazarRouter);
+
+
 app.use("/logout", (req, res) => {
   req.session.destroy();
+  req.app.locals.cookies = false;
   res.redirect("/");
 });
 
 app.use('/logout2', (req, res) => {
   req.session.destroy();
+  req.app.locals.cookies = false;
   res.redirect("/");
 });
 

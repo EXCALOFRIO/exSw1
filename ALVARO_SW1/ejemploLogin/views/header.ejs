@@ -46,20 +46,22 @@
 
       </div>
     </nav>
-    <% if (user && (!user.cookies || (user.cookies !== true ))) { %>
-      <div class="cookie-popup fixed-bottom">
-        <div class="cookie-content p-3">
-            <p>Este sitio web utiliza cookies para mejorar la experiencia del usuario. Al continuar navegando, aceptas el uso de cookies.</p>
-            <div class="cookie-buttons d-flex justify-content-center mt-3">
-                <form action="/cookiesAceptar" method="POST">
-                    <button type="submit" class="btn btn-primary">Aceptar</button>
-                    <input type="hidden" name="cookie" value="true">
-                </form>
-                <form action="/cookiesRechazar" method="POST">
-                    <button type="submit" class="btn btn-danger">Rechazar</button>
-                    <input type="hidden" name="cookie" value="false">
-                </form>
-            </div>
+  </nav>
+  <% if (req.app.locals.cookies === false || (user && (!user.cookies || (user.cookies !== true)))) { %>
+    <div class="cookie-popup fixed-bottom">
+      <div class="cookie-content p-3">
+        <p>Este sitio web utiliza cookies para mejorar la experiencia del usuario. Al continuar navegando, aceptas el uso de cookies.</p>
+        <div class="cookie-buttons d-flex justify-content-center mt-3">
+          <form action="/cookiesAceptar" method="POST">
+            <button type="submit" class="btn btn-primary">Aceptar</button>
+            <input type="hidden" name="cookie" value="true">
+          </form>
+          <form action="/cookiesRechazar" method="POST">
+            <button type="submit" class="btn btn-danger">Rechazar</button>
+            <input type="hidden" name="cookie" value="false">
+          </form>
         </div>
+      </div>
     </div>
-    <% } %>
+  <% } %>
+  

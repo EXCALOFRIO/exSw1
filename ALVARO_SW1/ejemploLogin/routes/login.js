@@ -4,7 +4,7 @@ const database = require('../database');
 const database2 = require('../database/models/user.model');
 
 router.get('/', function (req, res, next) {
-  res.render('login', { user: req.session.user });
+  res.render('login', { user: req.session.user, req: req });
 });
 
 router.post('/', async (req, res) => {
@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
     const cookies = await database2.getCookies(req.session.user.username);
     // Guardar el carrito en la sesión
     req.session.user.carrito = carrito || [];
-    req.session.user.cookies = cookies || false;
+    req.session.user.cookies = cookies || req.app.locals.cookies;
 
     req.session.message = "¡Login correcto!"
     console.log('Sesión del usuario antes de renderizar la vista:', req.session.user);
