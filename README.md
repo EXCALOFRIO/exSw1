@@ -29,6 +29,9 @@ npm run start
 
 ### alejandro.ramirezlarena@usp.ceu.es
 
+
+git clone https://bitbucket.org/eps-ceu/sw2_2024_repository.git
+
 ### git config --global user.name "alejandro.ramirezlarena"
 
 ### git config --global user.email alejandro.ramirezlarena@usp.ceu.es
