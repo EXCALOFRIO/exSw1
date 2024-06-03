@@ -164,5 +164,199 @@ https://github.com/juaki0315/examenSW1
     ```
 
 
+### SIMULACRO
+
+Apartado 1:
+
+```javascript
+db.listingsAndReviews.aggregate([
+  {
+    $unwind: "$reviews"
+  },
+  {
+    $group: {
+      _id: "$name",
+      reviewCount: { $sum: 1 }
+    }
+  },
+  {
+    $sort: { reviewCount: -1 }
+  },
+  {
+    $limit: 1
+  },
+  {
+    $project: {
+      _id: 0,
+      name: "$_id"
+    }
+  }
+])
+```
+
+Esta consulta desanida los documentos de revisiones, agrupa por el nombre del alojamiento y cuenta el número de revisiones, ordena de forma descendente por el conteo de revisiones, toma el primer resultado y proyecta solo el nombre del alojamiento.
+
+Apartado 2:
+
+```javascript
+db.listingsAndReviews.aggregate([
+  {
+    $unwind: "$amenities"
+  },
+  {
+    $group: {
+      _id: "$name",
+      amenitiesCount: { $sum: 1 }
+    }
+  },
+  {
+    $sort: { amenitiesCount: -1 }
+  },
+  {
+    $limit: 1
+  },
+  {
+    $project: {
+      _id: 0,
+      name: "$_id"
+    }
+  }
+])
+```
+
+Esta consulta desanida los documentos de amenities, agrupa por el nombre del alojamiento y cuenta el número de amenities, ordena de forma descendente por el conteo de amenities, toma el primer resultado y proyecta solo el nombre del alojamiento.
+
+Apartado 3:
+
+```javascript
+db.listingsAndReviews.aggregate([
+  {
+    $group: {
+      _id: "$property_type",
+      count: { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      property_type: "$_id",
+      count: 1
+    }
+  }
+])
+```
+
+Esta consulta agrupa los documentos por el campo property_type y cuenta el número de documentos para cada tipo de propiedad. Luego, proyecta los campos property_type y count, excluyendo el campo _id.
+
+Apartado 4:
+
+```javascript
+db.listingsAndReviews.aggregate([
+  {
+    $bucket: {
+      groupBy: "$beds",
+      boundaries: [0, 2, 3, 4, 5],
+      default: "Other",
+      output: {
+        count: { $sum: 1 }
+      }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      beds: "$_id",
+      count: 1
+    }
+  }
+])
+```
+
+Esta consulta utiliza la etapa $bucket para agrupar los documentos según el número de camas (beds) en los rangos 2, 3, 4 y 5. Luego, cuenta el número de documentos en cada rango y proyecta los campos beds y count, excluyendo el campo _id.
+
+Estas consultas son válidas independientemente de si se agregan o eliminan documentos de la colección, ya que se basan en operaciones de agregación que procesan todos los documentos de la colección en cada ejecución.
+
+Apartado 1:
+Para obtener el título y el número de premios de la película con más premios:
+
+```javascript
+db.movies.find({}, { title: 1, "awards.wins": 1 }).sort({ "awards.wins": -1 }).limit(1)
+```
+
+Apartado 2:
+Para mostrar un listado con las diferentes clasificaciones de edad y el número de documentos que tienen esa clasificación:
+
+```javascript
+db.movies.aggregate([
+    { $group: { _id: "$rated", count: { $sum: 1 } } }
+])
+```
+
+Apartado 3:
+Para mostrar un listado con los diferentes géneros de película que existen:
+
+```javascript
+db.movies.distinct("genres")
+```
+Estas consultas se mantienen válidas y funcionales sin importar la cantidad de documentos en la colección, proporcionando la información solicitada para cada apartado.
+
+En la colección listingAndReviews indique el/los nombre(s) del alojamiento con más reviews
+
+```javascript
+db.listingsAndReviews.find({},{"name": 1, "number_of_reviews": 2})
+.sort({"number_of_reviews": -1}).limit(2)
+```
+
+En la colección listingAndReviews indique el/los nombre(s) del alojamiento con más amenities.
+
+```javascript
+db.listingsAndReviews.aggregate([
+  {
+    $project: {
+      name: 1,
+      numAmenities: { $size: "$amenities" }
+    }
+  },
+  {
+    $sort: { numAmenities: -1 }
+  },
+  {
+    $limit: 1
+  }
+])
+```
+
+En la colección listingsAndReviews indique para cada tipo de property_type el número de
+alojamientos de ese tipo.
+
+```javascript
+ db.listingsAndReviews.aggregate([
+  {
+    $group: {
+      _id: "$property_type",
+      count: { $sum: 1 }
+    }
+  }
+])
+```
+
+
+En la colección listingAndReviews indique el número de alojamientos que tienen 2, 3, 4 o 5 beds.
+
+```javascript
+db.listingsAndReviews.aggregate([
+  {
+    $match: {
+      beds: { $in: [2, 3, 4, 5] }
+    }
+  },
+  {
+    $group: {
+      _id: "$beds",
+      count: { $sum: 1 }
+    }
+  }
+])
+```
 
 https://github.com/Daguerre45/Examen_SW1
