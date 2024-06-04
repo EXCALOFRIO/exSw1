@@ -1,0 +1,29 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+@font-face {
+  font-family: grovy;
+  src: url(/stylesheets/Groovy.ttf);
+}
+@font-face {
+  font-family: sunflower;
+  src: url(/stylesheets/sunflower.otf);
+}
+a {
+  color: #00B7FF;
+}
+
+h1{
+  font-family: grovy;
+  color: rgb(255, 255, 255);
+}
+h2{
+  font-family: sunflower;
+  color: rgb(255, 255, 255);
+}
+
+select{
+  background: rgb(128, 128, 141);
+  color: rgb(255, 255, 255);
+}

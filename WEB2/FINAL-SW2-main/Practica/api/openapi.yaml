@@ -1,0 +1,461 @@
+openapi: 3.0.0
+info: 
+  title: Scrapify
+  version: 0.0.1
+  description: API para el servicio de scraping de Pastebin
+paths: 
+  /login:
+    post:
+      summary: Inicia sesión en el servidor como admin
+      description: Permite iniciar sesión intercambiando un login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginToken"
+            example:
+              token: "e05c66d7394f9ab16c1283b8aeb5007e" 
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Unauthorized
+  /recursos: 
+    get: 
+      summary: Lista los recursos disponibles
+      description: Obtiene todos los recursos que pueden ser consultados por el usuario
+      responses: 
+        "200": 
+          description: OK
+          content: 
+            application/json: 
+              schema: 
+                $ref: "#/components/schemas/Recursos"
+              example:
+                id: 'email'
+                descripcion: 'Pastes de emails encontradas'
+        "204": 
+          description: No content
+          content: 
+            application/json: 
+              schema: 
+                $ref: "#/components/schemas/Respuesta204"
+    post:
+      summary: Añade un recurso
+      description: Añade un recurso a la lista de recursos disponibles
+      requestBody:
+        content:
+          application/json: 
+            schema: 
+              $ref: "#/components/schemas/Recurso"
+            example:
+              id: 'tarjeta_de_credito'
+              descripcion: 'Pastes de tarjetas de crédito encontradas'
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respuesta201"
+              example:
+                id: 'email'
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respuesta400"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respuesta401"
+        "403":
+          description: Forbidden
+          content:
+            application/json: 
+              schema:
+                $ref: "#/components/schemas/Respuesta403"
+  /recursos/{idRecurso}:
+    parameters:
+      - $ref: "#/components/parameters/idRecurso"
+    get:
+      summary: Obtiene todos los activos del recurso
+      description: | 
+        Recupera una todos los activos asociados a un recurso. Implementa paginación. 
+        Requiere ser admin.
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActivoPage"
+              example:
+                activos:
+                  - id: pepe@gmail.com
+                    ocurrencias:
+                      - timestamp: "12/03/2024"
+                        source: "www.ejemplo.com"
+                      - timestamp: "21/10/2024"
+                        source: "www.otro.ejemplo.com"
+                      - timestamp: "11/07/2024"
+                        source: "www.diferente.ejemplo.com"
+                  - id: juan@gmail.com
+                    ocurrencias:
+                      - timestamp: "12/03/2024"
+                        source: "www.diferente.ejemplo.com"
+                  - id: maria@gmail.com
+                    ocurrencias:
+                      - timestamp: "12/03/2024"
+                        source: "www.ejemplo.com"
+                      - timestamp: "11/07/2024"
+                        source: "www.diferente.ejemplo.com"
+                next: /recursos/emails?page=2&page_size=3
+    put:
+      summary: Modifica un recurso
+      description: Modifica un recurso de la lista de recursos disponibles
+      requestBody:
+        content:
+          application/json: 
+            schema: 
+              $ref: "#/components/schemas/RecursoPUT"
+            example:
+              descripcion: 'Pastes de tarjetas de crédito encontrados'
+      responses:
+        "200":
+          description: OK
+          content: 
+            application/json: 
+              schema: 
+                $ref: "#/components/schemas/Respuesta200"
+        "400":
+          description: Bad request
+          content:
+            application/json: 
+              schema:
+                $ref: "#/components/schemas/Respuesta400"
+        "401":
+          description: Unauthorized
+          content:
+            application/json: 
+              schema:
+                $ref: "#/components/schemas/Respuesta401"
+        "403":
+          description: Forbidden
+          content:
+            application/json: 
+              schema:
+                $ref: "#/components/schemas/Respuesta403"
+    delete:
+      summary: Borra un recurso
+      description: Borra un recurso de la lista de recursos disponibles
+      responses:
+        "200":
+          description: OK
+          content: 
+            application/json: 
+              schema: 
+                $ref: "#/components/schemas/Respuesta200"
+        "400":
+          description: Bad request
+          content:
+            application/json: 
+              schema:
+                $ref: "#/components/schemas/Respuesta400"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respuesta401"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respuesta403"
+        "404":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respuesta404"
+    post:
+      summary: Crea una entrada específica para el recurso genérico.
+      description: Añade un activo específico al recurso genérico.
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: "#/components/schemas/Activo"
+            example:
+              id: "657894532"
+              ocurrencias:
+                - timestamp: "02/03/2022"
+                  source: "www.ejemplo.es"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respuesta201"
+              example:
+               id: "ejemplo@gmail.com"
+               
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respuesta400"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respuesta401"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respuesta403"
+  /recursos/{idRecurso}/{idActivo}:
+    parameters:
+      - $ref: "#/components/parameters/idRecurso"
+      - $ref: "#/components/parameters/idActivo"
+    get:
+      summary: Obtiene un activo específico.
+      description: Obtiene un activo específico del recurso genérico.
+      responses: 
+        "200": 
+          description: OK
+          content: 
+            application/json: 
+              schema: 
+                $ref: "#/components/schemas/Activo"
+              example:
+                id: "ejemplo@gmail.com"
+                ocurrencias:
+                  - timestamp: "12/03/2024"
+                    source: "www.ejemplo.com"
+        "404":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respuesta404"
+              example: "El recurso ejemplo@gmail.com no existe"
+    put:
+      summary: Modifica un activo 
+      description: Modifica un activo específico del recurso genérico.
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: "#/components/schemas/ActivoPUT"
+            example:
+              ocurrencia:
+                timestamp: "02/05/2019"
+                source: "https://www.ejemplo.network"
+      responses:
+        "200":
+          description: OK
+          content: 
+            application/json: 
+              schema: 
+                $ref: "#/components/schemas/Respuesta200"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respuesta400"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respuesta401"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respuesta403"
+    delete:
+      summary: Borra un recurso
+      description: Borra un recurso de la lista de recursos disponibles
+      responses:
+        "200":
+          description: OK
+          content: 
+            application/json: 
+              schema: 
+                $ref: "#/components/schemas/Respuesta200"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respuesta400"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respuesta401"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respuesta403"
+        "404":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respuesta404"
+              example: "El recurso ejemplo@gmail.com no existe"
+              
+components:
+  parameters:
+    idRecurso:
+      name: idRecurso
+      in: path
+      required: true
+      schema:
+        type: string
+    idActivo:
+      name: idActivo
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    Respuesta200:
+      type: string
+      enum:
+        - Todo correcto
+    Respuesta201:
+      type: object
+      required: 
+        - id
+      properties:
+        id:
+          type: string
+          description: Id del recurso creado
+    Respuesta204:
+      type: string
+      enum:
+        - No hay contenido
+    Respuesta400:
+      type: string
+      enum:
+        - Formato incorrecto
+        - El id proporcionado ya existe
+    Respuesta401:
+      type: string
+      enum:
+        - Esta operación requiere autentificación
+    Respuesta403:
+      type: string
+      enum: 
+        - No se dispone de los permisos necesarios para realizar esta operación
+    Respuesta404:
+      type: string
+      enum:
+        - El recurso {id} no existe
+    Recursos:
+      type: array
+      items:
+        $ref: "#/components/schemas/Recurso"
+    Recurso:
+      type: object
+      required:
+        - id
+        - descripcion
+      properties: 
+        id: 
+          type: string  
+          description: Id del recurso
+        descripcion: 
+          type: string
+          description: Descripción del recurso
+    RecursoPUT:
+      type: object
+      required:
+        - descripcion
+      properties: 
+        descripcion: 
+          type: string
+          description: Nueva descripción para el recurso
+    Activo:
+      type: object
+      required:
+        - id
+        - ocurrencias
+      properties:
+        id:
+          type: string
+          description: "valor del activo (ejemplo: 'pepe@protonmail.com')"
+        ocurrencias:
+          type: array
+          items:
+            $ref: "#/components/schemas/Ocurrencia"
+    ActivoPUT:
+      type: object
+      required:
+        - ocurrencia
+      properties:
+        ocurrencia:
+          $ref: "#/components/schemas/Ocurrencia"
+    ActivoPage:
+      type: object
+      required:
+        - activos
+        - next_page
+      properties:
+        activos:
+          description: Lista de activos que compone una página
+          type: array
+          items:
+            $ref: "#/components/schemas/Activo"
+        next:
+          description: Enlace a la siguiente página.
+          type: string
+    Ocurrencia:
+      type: object
+      description: Objeto que representa un 'match' de un activo
+      required:
+        - timestamp
+        - source
+      properties:
+        timestamp:
+          type: string
+          description: Fecha en la que se encontró el activo
+        source:
+          type: string
+          description: Enlace de la página en la que encontró el activo
+    LoginToken:
+      type: object
+      description: Token para autentificación
+      required:
+        - token
+      properties:
+        token:
+          type: string

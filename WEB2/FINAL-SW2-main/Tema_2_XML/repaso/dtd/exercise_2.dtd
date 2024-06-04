@@ -1,0 +1,13 @@
+<!DOCTYPE lettera [
+
+<!ELEMENT lettera (#PCDATA | cliente | ordine | articolo)*>
+<!ELEMENT cliente (#PCDATA)>
+<!ELEMENT ordine (articolo+)>
+<!ELEMENT articolo (codice, descr)*>
+<!ELEMENT codice (#PCDATA)>
+<!ELEMENT descr (#PCDATA)>
+<!ELEMENT responsabile (#PCDATA | tit)*>
+<!ELEMENT tit (#PCDATA)>
+
+<!ATTLIST ordine num CDATA #REQUIRED>
+]>

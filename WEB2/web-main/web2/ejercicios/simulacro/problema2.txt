@@ -1,0 +1,51 @@
+# Soluciones al problema 2
+
+## Apartado 1
+db.listingsAndReviews.find({},{name:1, number_of_reviews: 1}).sort({number_of_reviews: -1}).limit(1)
+[
+  {
+    _id: '12954762',
+    name: 'Near Airport private room, 2 bedroom granny flat**',
+    number_of_reviews: 469
+  }
+]
+
+
+## Apartado 2
+db.listingsAndReviews.aggregate([ { $project: { _id: 1, amenities: { $size: "$amenities" } } }, { $sort: { amenities: -1 } }, { $limit: 1 }])
+[ { _id: '1211274', amenities: 68 } ]
+
+
+
+## Apartado 3
+db.listingsAndReviews.aggregate([{"$group": {_id:"$property_type", count: {$sum:1}}}])
+[
+  { _id: 'Treehouse', count: 1 },
+  { _id: 'Guest suite', count: 23 },
+  { _id: 'House', count: 179 },
+  { _id: 'Apartment', count: 1053 },
+  { _id: 'Hostel', count: 8 },
+  { _id: 'Loft', count: 46 },
+  { _id: 'Farm stay', count: 3 },
+  { _id: 'Boutique hotel', count: 7 },
+  { _id: 'Cottage', count: 8 },
+  { _id: 'Earth house', count: 1 },
+  { _id: 'Boat', count: 2 },
+  { _id: 'Townhouse', count: 33 },
+  { _id: 'Condominium', count: 112 },
+  { _id: 'Resort', count: 2 },
+  { _id: 'Villa', count: 10 },
+  { _id: 'Nature lodge', count: 1 },
+  { _id: 'Other', count: 5 },
+  { _id: 'Bed and breakfast', count: 16 },
+  { _id: 'Tiny house', count: 2 },
+  { _id: 'Bungalow', count: 4 }
+]
+
+## Apartado 4
+db.listingsAndReviews.count({beds: { $in: [2, 3, 4, 5] }})
+Math.abs(db.listingsAndReviews.find({"beds": {"$gte":2}}).count() - db.listingsAndReviews.find({"beds": {"$gt":5}}).count())
+db.listingsAndReviews.find({beds: {$eq: 2}}).count() + db.listingsAndReviews.find({beds: {$eq: 3}}).count() + db.listingsAndReviews.find({beds: {$eq: 4}}).count() + db.listingsAndReviews.find({beds: {$eq: 5}}).count()
+
+732
+

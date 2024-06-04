@@ -1,0 +1,6 @@
+<!DOCTYPE content [
+    <!ELEMENT content (ocurrencia)>
+    <!ELEMENT ocurrencia (timestamp, source)>
+    <!ELEMENT timestamp (#PCDATA)>
+    <!ELEMENT source (#PCDATA)>
+]>

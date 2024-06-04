@@ -1,0 +1,63 @@
+Haz las consultas XPath que cumplan lo siguiente y el resultado sea el que se muestre después:
+
+Los nombres de todos los proyectos: 
+    - Wikipedia
+    - Wiktionary
+
+Respuesta = /Wikimedia/projects/project/data(@name)
+Respuesta = /Wikimedia/projects/project/@name
+Respuesta = //project/data(@name)
+
+------------------------------------------------------------------------------------------
+
+Solo las URL de todos los proyectos en español
+    - es.wikipedia.org
+    - es.wiktionary.org
+
+Respuesta = /Wikimedia/projects/project/editions/edition[@language="Spanish"]
+Respuesta = /Wikimedia/projects/project/editions/data(edition[@language="Spanish"])
+Respuesta = /Wikimedia/projects/project/editions/edition[@language="Spanish"]/text()
+
+------------------------------------------------------------------------------------------
+
+Todas las ediciones de todos los proyectos
+   <edition language="English">en.wikipedia.org</edition>
+   <edition language="German">de.wikipedia.org</edition>
+   <edition language="French">fr.wikipedia.org</edition>
+   <edition language="Polish">pl.wikipedia.org</edition>
+   <edition language="Spanish">es.wikipedia.org</edition>
+   <edition language="English">en.wiktionary.org</edition>
+   <edition language="French">fr.wiktionary.org</edition>
+   <edition language="Vietnamese">vi.wiktionary.org</edition>
+   <edition language="Turkish">tr.wiktionary.org</edition>
+   <edition language="Spanish">es.wiktionary.org</edition>
+
+Respuesta = /Wikimedia/projects/project/editions/data(edition)
+Respuesta = /Wikimedia/projects/project/editions/edition
+Respuesta = /Wikimedia/projects/project/editions/*
+Respuesta = //editions
+
+------------------------------------------------------------------------------------------
+
+Sólo las URL de todas las Wikipedias
+   en.wikipedia.org
+   de.wikipedia.org
+   fr.wikipedia.org
+   pl.wikipedia.org
+   es.wikipedia.org
+
+Respuesta = /Wikimedia/projects/project[@name="Wikipedia"]
+Respuesta = /Wikimedia/projects/data(project[@name="Wikipedia"])
+
+------------------------------------------------------------------------------------------
+
+La cuarta edición del Wiktionary
+
+<edition language="Turkish">tr.wiktionary.org</edition>
+
+Respuesta = //project[2]/editions[1]/edition[4]
+Respuesta = //project[2]/editions/edition[4]
+
+------------------------------------------------------------------------------------------
+
+

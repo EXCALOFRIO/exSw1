@@ -1,0 +1,27 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema#",
+    "title": "Asset put",
+    "description": "Json schema para los activos a la hora de hacer un PUT",
+    "type": "object",
+    "additionalProperties": true,
+    "required": [
+        "ocurrencia"
+    ],
+    "properties": {
+        "ocurrencia": {
+            "type": "object",
+            "required": [
+                "timestamp",
+                "source"
+            ],
+            "properties": {
+                "timestamp": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

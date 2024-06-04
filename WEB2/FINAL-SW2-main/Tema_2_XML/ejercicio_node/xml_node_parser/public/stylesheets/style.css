@@ -1,0 +1,25 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: black;
+  color: white;
+}
+
+#main-content {
+  background-color: rgb(30, 30, 30);
+}
+
+img {
+  width: 80%;
+}
+
+.wrapped {
+  word-wrap: normal;
+}
+
+a {
+  color: #00B7FF;
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!DOCTYPE stock[
+<!ELEMENT stock (new-car | used-car)*>
+<!ELEMENT new-car (model, price)>
+<!ELEMENT used-car (model, price, mileage, condition?)>
+<!ELEMENT model (#PCDATA)>
+<!ELEMENT price (#PCDATA)>
+<!ELEMENT mileage (#PCDATA)>
+<!ELEMENT condition (#PCDATA)>
+]>

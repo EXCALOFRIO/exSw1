@@ -1,0 +1,45 @@
+# Soluciones al problema 2
+
+## Apartado 1
+En la colección listingAndReviews indique el/los nombre(s) del alojamiento con más reviews.
+db.db.listingsAndReviews.find({}, {_id: 0, name: 1}).sort({number_of_reviews: -1}).limit(1)
+
+
+## Apartado 2
+En la colección listingAndReviews indique el/los nombre(s) del alojamiento con más amenities.
+db.listingsAndReviews.aggregate({$project: {_id: 0,name: 1,amenity_count: {$size: '$amenities'}}},{$sort:{amenity_count: -1}},{$limit: 1})
+
+
+## Apartado 3
+En la colección listingAndReviews indique para cada tipo de property_type el número de alojamientos de ese tipo.
+db.listingsAndReviews.aggregate([ { $group: { _id: "$property_type", count: { $sum: 1 } } }])
+
+
+## Apartado 4
+En la colección listingAndReviews indique el número de alojamientos que tienen 2, 3, 4 o 5 beds.
+db.listingsAndReviews.aggregate({$match:{beds:{$in:[2,3,4,5]}}},{$group:{_id:"$beds",count:{$sum:1}}})
+que no tnega 2,3,4 o 5 camas: db.listingsAndReviews.aggregate({$match:{beds:{$nin:[2,3,4,5]}}},{$group:{_id:"$beds",count:{$sum:1}}})
+
+
+
+EXTRAS
+
+En la colección listingAndReviews indique el nombre de alojamientos que tienen 2, 3, 4 o 5 beds.
+db.listingsAndReviews.aggregate({$match:{beds:{$in:[2,3,4,5]}}},{$project:{_id:0,name:1,beds:1}})
+
+
+Cual seria el precio maximo, minimo y medio de los alojamientos
+db.listingsAndReviews.aggregate([{$group: {_id: null,maxPrice: { $max: "$price" },minPrice: { $min: "$price" },averagePrice: { $avg: "$price" }}}])
+
+
+cual seria el nombre de los alojamientos que tienen TV de amenities e imprime el amenitie tv tmbn
+db.listingsAndReviews.aggregate({$match:{amenities:"TV"}},{$project:{_id:0, name:1,amenities:{$slice:["$amenities",1]}}})
+db.listingsAndReviews.find({amenities:"TV"},{_id:0,name:1,amenities:{$slice:1}})
+
+
+Cual seria el nombre de los alojamientos que ofrencen alojamiento con Wifi y TV a menos de 30 €, muestre en resultado el nombre, precio y amenities solicitadas
+db.listingsAndReviews.find({amenities:"TV",amenities:"Wifi", price:{$lt:30}},{_id:0, name:1, price:1, amenities:["TV","Wifi"]})
+
+
+cuantos alojamientos ofrencen alojamiento con Wifi y TV a menos de 30 €,
+db.listingsAndReviews.count({amenities:"TV",amenities:"Wifi", price:{$lt:30}})

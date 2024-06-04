@@ -1,0 +1,16 @@
+<lettera>
+Getile <cliente> tal dei tali </cliente>,
+la informiamo che i segueti aticoli da lei ordinti non sono più disponibili a magazzino:
+<ordine num="1234">
+<articolo>
+  <codice>1</codice>
+  <descr>aticolo 1</descr>
+</articolo>
+<articolo>
+  <codice>5</codice>
+  <descr>aticolo 5</descr>
+</articolo>
+</ordine>
+Cordiali salti,
+<responsabile><tit>dr.</tit>Mario Rossi</responsabile>
+</lettera>

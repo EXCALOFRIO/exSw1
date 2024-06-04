@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<stock>
+  <new-car>
+    <model>Toyota Yaris</model>
+    <price>24000</price>
+  </new-car>
+  <used-car>
+    <model>Toyota Yaris</model>
+    <price>15000</price>
+    <mileage>17000</mileage>
+  </used-car>
+</stock>

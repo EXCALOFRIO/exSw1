@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS</title>
+</head>
+<body>
+
+    <button onclick="hello()">Press Me</button>
+    <p id="test"></p>
+    <h1>Hello</h1>
+
+    <script src="./hello.js">
+        //src="./hello.js"
+        //alert('Hello');
+        /*function hello() {
+            let person = prompt("Enter Name", "Messi");
+            document.getElementById("test").innerHTML = "Hello, " + person;
+            console.log(person);
+        }*/
+        document.addEventListener("keydown", logkey);
+        function logkey(e) {
+            console.log(e);
+        }
+
+        document.addEventListener("click", click);
+        function click(e) {
+            console.log(e);
+        }
+
+        $(document).ready(function(){
+            $("h1").click(function(){
+                $(this).hide();
+            });
+        });
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+         $(document).ready(function(){
+            $("h1").click(function(){
+                $(this).hide();
+            });
+
+            $("h1").css("color", "green");
+        });
+
+    </script>
+</body>
+</html>

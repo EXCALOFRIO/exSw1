@@ -1,0 +1,44 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema#",
+    "title": "Asset post",
+    "description": "Json schema para los post delos boks",
+    "type": "object",
+    "additionalProperties": true,
+    "required": [
+        "_id",
+        "title",
+        "author"
+    ],
+    "properties": {
+        "_id": {
+            "type": "string"
+        },
+        "_isbn": {
+            "type": "string"
+        },
+        "title": {
+            "type": "string"
+        },
+        "subtitle": {
+            "type": "string"
+        },
+        "author": {
+            "type": "string"
+        },
+        "published": {
+            "type": "string"
+        },
+        "publisher": {
+            "type": "string"
+        },
+        "pages": {
+            "type": "number"
+        },
+        "description": {
+            "type": "string"
+        },
+        "website": {
+            "type": "string"
+        }
+    }
+}

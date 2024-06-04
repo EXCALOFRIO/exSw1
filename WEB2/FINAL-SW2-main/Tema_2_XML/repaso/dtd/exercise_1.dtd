@@ -1,0 +1,17 @@
+<!DOCTYPE shiporder [
+
+<!ELEMENT shiporder (orderperson, shipto, item+)>
+<!ELEMENT orderperson (#PCDATA)>
+<!ELEMENT shipto (name, address, city, country)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT address (#PCDATA)>
+<!ELEMENT city (#PCDATA)>
+<!ELEMENT country (#PCDATA)>
+<!ELEMENT item (title, note?, quantity, price)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT note (#PCDATA)>
+<!ELEMENT quantity (#PCDATA)>
+<!ELEMENT price (#PCDATA)>
+
+<!ATTLIST shiporder orderid CDATA #REQUIRED>
+]>

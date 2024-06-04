@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Orderdetails>
+    <Customer id="12">
+        <fname from="Juan Perez Rodríguez"/>
+        <cname>Elena Palos Ramírez</cname>
+        <destination Country="Spain" Delivdate="19/02/2023"/>
+        <email>e.palosramirez@gmail.com</email>
+        <eid>Xf30af38jf413r120nv</eid>
+    </Customer>
+    <Customer id="37">
+        <destination Country="France" Delivdate="13/02/2023"/>
+    </Customer>
+</Orderdetails>

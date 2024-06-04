@@ -1,0 +1,55 @@
+{
+  "title": "Terrifier 2",
+  "year": 2023,
+  "plot": "After being resurrected by a sinister entity, Art the Clown returns to the timid town of Miles County where he targets a teenage girl and her younger brother on Halloween night.",
+  "country": "United States of America",
+  "runtime": 138,
+  "genres": ["Horror", "Slasher", "Gore"],
+  "rating": "Not Rated",
+  "directors": [{
+    "name": "Damien Leone",
+    "age": 32 
+  }],
+  "actors": [
+    {
+      "name": "David Howard Thornton",
+      "age": 42
+    },
+    {
+      "name": "Lauren LaVera",
+      "age": 28
+    },
+    {
+      "name": "Elliott Fullam",
+      "age": 17
+    },
+    {
+      "name": "Sarah Voigt",
+      "age": 37
+    },
+    {
+      "name": "Kailey Hyman",
+      "age": 27
+    },
+    {
+      "name": "Griffin Santopietro",
+      "age": 17
+    },
+    {
+      "name": "Owen Myre",
+      "age": 17
+    },
+    {
+      "name": "Casey Hartnett",
+      "age": 32
+    },
+    {
+      "name": "Samantha Scaffidi",
+      "age": 34
+    },
+    {
+      "name": "Felissa Rose",
+      "age": 53
+    }
+  ]
+}

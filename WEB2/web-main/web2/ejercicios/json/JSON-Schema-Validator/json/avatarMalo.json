@@ -1,0 +1,8 @@
+{
+    "nombrePelicula": "Avatar: The Way of Water",
+    "estreno": "hola",
+    "generos": ["accion","aventura","drama","fantasia","ciencia ficcion","thriller"],
+    "duracion" : "192 minutos",
+    "clasificacion" : "PG-13",
+    "director": "James Cameron"
+}

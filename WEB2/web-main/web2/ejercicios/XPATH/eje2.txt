@@ -1,0 +1,5 @@
+Recuperar datos del primer h1 
+
+Respuesta = //body/h1[1]
+Respuesta = //h1[1]
+Respuesta = /html/body/h1[1]

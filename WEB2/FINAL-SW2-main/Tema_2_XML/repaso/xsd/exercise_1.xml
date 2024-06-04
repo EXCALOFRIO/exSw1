@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF‐8"?>
+<student>
+<firstName>Luca</firstName>
+<lastName>Rossi</lastName>
+<id>281283</id>
+<plan>
+<courses year="3">
+<course>
+<name> Programmazione Orientata agli Oggetti </name>
+<shortName>POO</shortName>
+<record>
+<grade>30</grade>
+<date>13/06/11</date>
+</record>
+</course>
+<course>
+<name>Analisi e progettazione del software</name>
+<shortName>APS</shortName>
+</course>
+</courses>
+</plan>
+</student>

@@ -1,0 +1,64 @@
+## Ejercicios MongoDB
+
+## EJ1
+
+1. En sample_training.zips ¿Cuántas colecciones tienen menos de 1000 personas en el campo pop? (sol. 8065)
+db.zips.find({pop:{$lt:1000}}).count()
+
+2. En sample_training.trips ¿Cuál es la diferencia entre la gente que nació en 1998 y la que nació después de 1998? (sol. 6)
+Math.abs(db.trips.find({"birth year":{$eq:1998}}).count() - db.trips.find({"birth year":{$gt:1998}}).count())
+
+3. En sample_training.routes ¿Cuántas rutas tienen al menos una parada? (sol. 11)
+db.routes.find({stops:{$gte:1}}).count()
+
+
+4. En sample_training.inspections ¿Cuántos negocios tienen un resultado de inspección "Out of Business" y pertenecen al sector "Home Improvement Contractor - 100"? (sol. 4)
+db.inspections.find({$and:[{result:{$eq:"Out of Business"}}, {sector:{$eq:"Home Improvement Contractor - 100"}}]}).count()
+db.inspections.find({result:"Out of Business", sector:"Home Improvement Contractor - 100"}).count()
+
+5. En sample_training.inspections ¿Cuántos documentos hay con fecha de inspección "Feb 20 2015" o "Feb 21 2015" y cuya sector no sea "Cigarette Retail Dealer - 127"? (sol. 204)
+db.inspections.find({$and:[{$or:[{date:"Feb 20 2015"},{date:"Feb 21 2015"}]},{sector:{$ne:"Cigarette Retail Dealer - 127"}}]}).count()
+db.inspections.find({$or:[{date:"Feb 20 2015"},{date:"Feb 21 2015"}],sector:{$ne:"Cigarette Retail Dealer - 127"}}).count()
+
+## EJ2
+1. En sample_training.companies, ¿cuántas empresas tienen más empleados que el año en el que se fundaron? (sol. 324)
+db.companies.find({$expr:{$gt:["$number_of_employees","$founded_year"]}}).count()
+
+2. En sample_training.companies, ¿en cuántas empresas coinciden su permalink con su twitter_username? (sol. 1299)
+db.companies.find({$expr:{$eq:["$twitter_username","$permalink"]}}).count()
+
+3. En sample_airbnb.listingsAndReviews, ¿cuál es el nombre del alojamiento en el que pueden estar más de 6 personas alojadas y tiene exactamente 50 reviews? (sol. Sunset Beach Lodge Retreat)
+db.listingsAndReviews.find({$and:[{accommodates:{$gt:6}},{number_of_reviews:{$eq:50}}]},{name:1,_id:0})
+db.listingsAndReviews.find({accommodates:{$gt:6},number_of_reviews:{$eq:50}},{name:1,_id:0})
+db.listingsAndReviews.find({accommodates:{$gt:6},number_of_reviews:{$eq:50}},{name:1,_id:0})
+db.listingsAndReviews.find({accommodates:{$gt:6},number_of_reviews:50},{name:1,_id:0})
+db.listingsAndReviews.find({accommodates:{$gt:6},reviews:{$size:50}},{name:1,_id:0})
+
+4. En sample_airbnb.listingsAndReviews, ¿cuántos documentos tienen el "property_type" "House" e incluyen "Changing table"  como una de las "amenities"? (sol. 11)
+db.listingsAndReviews.find({property_type:"House",amenities:"Changing table"}).count()
+
+5. En sample_training.companies, ¿Cuántas empresas tienen oficinas en Seattle? (sol. 117)
+db.companies.find({"offices.city":"Seattle"}).count()
+db.companies.find({offices:{$elemMatch:{city:"Seattle"}}}).count()
+
+6. En sample_training.companies, haga una query que devuelva únicamente el nombre de las empresas que tengan exactamente 8 "funding_rounds"
+db.companies.find({funding_rounds:{$size:8}},{name:1, _id:0})
+
+7. En sample_training.trips, ¿cuántos viajes empiezan en estaciones que están al oeste de la longitud -74? (sol. 1928)
+db.trips.find({'start station location.coordinates.0':{$lt:-74}}).count()
+
+8. En sample_training.inspections, ¿cuántas inspecciones se llevaron a cabo en la ciudad de "NEW YORK"? (sol. 18279)
+db.inspections.find({"address.city":"NEW YORK"}).count()
+
+9. En sample_airbnb.listingsAndReviews, haga una query que devuelva el nombre y la dirección de los alojamientos que tengan "Internet" como primer elemento de "amenities"
+db.listingsAndReviews.find({"amenities.0":"Internet"},{name:1,address:1,_id:0})
+
+## EJ3
+1. En sample_airbnb.listingsAndReviews, ¿qué "room types" existen?
+db.listingsAndReviews.aggregate([{"$group": {_id:"$room_type"}}])
+
+2. En sample_training.companies, haga una query que devuelva el nombre y el año en el que se fundaron las 5 compañías más antiguas.
+db.companies.find({founded_year:{$ne: null}},{name:1, founded_year:1, _id:0}).sort({founded_year:1}).limit(5)
+
+3. En sample_training.trips, ¿en qué año nació el ciclista más joven? (sol. 1999)
+db.trips.find({"birth year":{$ne: ""}}, {"birth year": 1}).sort({"birth year": -1}).limit(1)

@@ -1,0 +1,561 @@
+openapi: 3.1.0
+info:
+  title: Cinema's API
+  version: 0.0.1
+  description: API for the cinema's web service
+paths:
+  /movies:
+    get:
+      summary: Listing of all available movies.
+      description: |
+        Gets all movies in store, let them be currently screening movies, past screening movies
+        or future screening movies.
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  description: List of movie ids
+        "204":
+          description: No Content
+    post:
+      summary: Adds a movie
+      description: Adds a movie to the cinema's catalog (not to be confused with currently featured movies).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/MovieProperties'
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - id
+                  - link
+                properties:
+                  id:
+                    type: string
+                    description: Created movie's Id
+                  link:
+                    type: string
+                    description: Link to the movie
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: string
+                const: You must be logged in to perform this operation
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: string
+                const: You lack the necessary permissions to perform this operation
+  /movies/{id}:
+    get:
+      summary: Queries a movie
+      description: Queries one of the available movies
+      parameters:
+        - name: id
+          description: Movie's Id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Movie'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: string
+                const: No such resource {id}
+    put:
+      parameters:
+        - name: id
+          description: Movie's Id
+          in: path
+          schema:
+            type: string
+          required: true
+      summary: Updates a movie
+      description: Updates one of the available movies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/MovieProperties'
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - id
+                  - link
+                properties:
+                  id:
+                    type: string
+                    description: Updated movie's Id
+                  link:
+                    type: string
+                    description: Link the the updated movie
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: string
+                const: You must be logged in to perform this operation
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: string
+                const: You lack the necessary permissions to perform this operation
+    delete:
+      parameters:
+        - name: id
+          description: Movie's Id
+          in: path
+          schema:
+            type: string
+          required: true
+      summary: Deletes a movie
+      description: Deletes one of the available movies
+      responses:
+        "200":
+          description: Ok
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: string
+                const: You must be logged in to perform this operation
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: string
+                const: You lack the necessary permissions to perform this operation
+  /movies/{id}/screenings:
+    get:
+      summary: Listing of all available screenings for a movie
+      description: Gets all available screenings for a movie
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  description: List of session Ids
+        "204":
+          description: No Content
+    post:
+      summary: Adds a screening session for a movie
+      description: Adds a screening session for a movie to the current list of sessions for it
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/ScreeningSessionProperties'
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - id
+                  - link
+                properties:
+                  id:
+                    type: string
+                    description: Created screening session's id
+                  link:
+                    type: string
+                    description: Link to the created screening session
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: string
+                const: You must be logged in to perform this operation
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: string
+                const: You lack the necessary permissions to perform this operation
+  /movies/{movie_id}/screenings/{screening_id}:
+    get:
+      summary: Queries a certain screening session
+      description: Queries a certain screening session for a movie
+      parameters:
+        - name: movie_id
+          description: Movie's Id
+          in: path
+          schema:
+            type: string
+          required: true
+        - name: screening_id
+          description: Screening session's id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ScreeningSession'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: string
+                enum:
+                  - No such resource {movie_id}
+                  - No such resource {screening_id}
+    put:
+      parameters:
+        - name: movie_id
+          description: Movie's Id
+          in: path
+          schema:
+            type: string
+          required: true
+        - name: screening_id
+          description: Screening session's id
+          in: path
+          schema:
+            type: string
+          required: true
+      summary: Updates a screening session
+      description: Updates one of the avalibal screening sessions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/ScreeningSessionProperties'
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - id
+                  - link
+                properties:
+                  id:
+                    type: string
+                    description: Updated session's Id
+                  link:
+                    type: string
+                    description: Link to the updated session
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: string
+                const: You must be logged in to perform this operation
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: string
+                const: You lack the necessary permissions to perform this operation
+    delete:
+      parameters:
+        - name: movie_id
+          description: Movie's Id
+          in: path
+          schema:
+            type: string
+          required: true
+        - name: screening_id
+          description: Screening session's id
+          in: path
+          schema:
+            type: string
+          required: true
+      summary: Deletes a screening session
+      description: Deletes a screening session from the list of available sessions for a movie
+      responses:
+        "200":
+          description: Ok
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: string
+                const: You must be logged in to perform this operation
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: string
+                const: You lack the necessary permissions to perform this operation
+  /features:
+    get:
+      summary: Listing of all currently featured movies
+      description: Gets all currently screening movies
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  description: List of movie Ids
+        "204":
+          description: No Content
+    post:
+      summary: Adds a movie to the list of features
+      description: Adds a movie to the list of currently screening movies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  description: Id of the movie to add to the featured list
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: string
+                const: You must be logged in to perform this operation
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: string
+                const: You lack the necessary permissions to perform this operation
+  /features/{id}:
+   delete:
+      parameters:
+        - name: id
+          description: Movie's Id
+          in: path
+          schema:
+            type: string
+          required: true
+      summary: Removes a feature
+      description: Removes one of the currently screening movies from the featured list
+      responses:
+        "200":
+          description: Ok
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: string
+                const: You must be logged in to perform this operation
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: string
+                const: You lack the necessary permissions to perform this operation
+components:
+  schemas:
+    Movie:
+      allOf:
+        - $ref: '#/components/schemas/MovieProperties'
+        - $ref: '#/components/schemas/MovieRequiredProperties'
+    MovieRequiredProperties:
+      type: object
+      required: 
+        - id
+        - title
+        - plot
+        - year
+        - country
+        - runtime
+        - genres
+        - rating
+        - directors
+        - actors
+    MovieProperties:
+      type: object,
+      title: movie,
+      description: Information about a movie,
+      properties: 
+        id:
+          type: string
+          description: Movie's Identifier
+        title: 
+          type: string
+          description: Movie's title
+        year: 
+          type: number
+          minimum: 1888 
+          description: Release year
+        plot: 
+          type: string
+          description: Brief summary of the movie
+        country: 
+          type: string
+          description: Country of origin
+        runtime: 
+          type: number
+          minimum: 0
+          description: Movie's runtime in minutes
+        genres: 
+          type: array
+          minItem: 1
+          items: 
+            type: string
+            description: Movie genre
+        rating: 
+          enum:
+            - G
+            - M
+            - PG
+            - R
+            - X
+            - Not Rated
+          description: MPAA rating of the movie
+        directors: 
+          type: array
+          description: Movie directors
+          minItem: 1
+          items:
+            $ref: '#/components/schemas/Person'
+        actors: 
+          type: array
+          description: Movie actors
+          minItem: 1
+          items:
+            $ref: '#/components/schemas/Person'
+        sessions:
+          type: array
+          description: List of session Id's belonging to this movie
+          items:
+            type: string
+    Person: 
+        type: object
+        description: Represents a person's information
+        required:
+          - name
+          - age
+        properties: 
+          name: 
+            type: string
+            description: Person's name
+          age: 
+            type: number
+            minimum: 0
+            description: Person's age
+    ScreeningSession:
+      allOf:
+        - $ref: '#components/schemas/ScreeningSessionProperties'
+        - $ref: '#components/schemas/ScreeningSessionRequiredProperties'
+    ScreeningSessionProperties:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of the screening session
+        movieId:
+          type: string
+          description: Id of the movie to which the session belongs
+        date:
+          type: string
+          description: Formatted string containing the date and time of the session
+        room:
+          type: string
+          description: Room where the screening will take place
+    ScreeningSessionRequiredProperties:
+      type: object
+      required:
+        - id
+        - movieId
+        - date
+        - room

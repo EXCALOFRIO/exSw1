@@ -1,0 +1,19 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema#",
+    "title": "Schema Recurso post",
+    "description": "Json schema para los recursos a la hora de hacer un post",
+    "type": "object",
+    "additionalProperties": true,
+    "required": ["id", "descripcion"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "El nombre del recurso"
+      },
+      "descripcion": {
+        "type": "string",
+        "description": "Descripción del recurso"
+      }
+    }
+}
+  

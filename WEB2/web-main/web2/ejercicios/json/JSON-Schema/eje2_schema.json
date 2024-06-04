@@ -1,0 +1,63 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema#",
+    "type": "object",
+    "title": "Squad",
+    "description": "Squad description",
+    "additionalProperties": true,
+    "required": [
+        "squadName",
+        "homeTown",
+        "formed",
+        "secretBase",
+        "active",
+        "members"
+    ],
+    "properties": {
+        "squadName": {
+            "type": "string",
+            "description": "Name of the Squad",
+            "maxLength": 50
+        },
+        "homeTown": {
+            "type": "string",
+            "maxLength": 50,
+            "description": "Name of the home town of the squad"
+        },
+        "formed": {
+            "type": "integer",
+            "minimum":2000,
+            "maximum":2050,
+            "description": "Year the squad was formed"
+        },
+        "secretBase": {
+            "type": "string",
+            "maxLength": 50,
+            "description": "Name of the secret base of the squad"
+        },
+        "active": {
+            "type": "boolean",
+            "description": "Is the squad still active or not"
+        },
+        "members": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/mem" },
+            "description": "Members of the squad"
+        }
+
+    },
+    "$defs": {
+        "mem": {
+          "type": "object",
+          "title": "Member description",
+          "description": "Give a description of the members of the squad",
+          "additionalProperties": true,
+          "required": ["name",  "age", "secretIdentity", "powers"],
+          "properties": {
+            "name": { "type": "string", "description": "Name of member"},
+            "age": { "type": "integer", "description": "Age of member", "minimum": 1 },
+            "secretIdentity": { "type": "string", "description": "Real name of member"},
+            "powers": { "type": "array", "items": {"type": "string"}, "description": "list of powers" }
+          }
+        }
+    }
+}

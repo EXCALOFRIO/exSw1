@@ -1,0 +1,10 @@
+{
+    "name": "Los Jugadores de Cartas",
+    "artist": "Paul Cézanne",
+    "description": "Los jugadores de cartas (Les Joueurs de cartes en el título francés original) es una serie de cinco cuadros sobre el tema de la partida de cartas, que realizó el pintor francés Paul Cézanne entre 1890 y 1895 (la comenzó estando en Suiza y la acabó en Aix-en-Provence).",
+    "dimension": {
+        "width": 47.5, 
+        "height": 57
+    },
+    "tags": ["famous", "watercolor"]
+}

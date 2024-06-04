@@ -1,0 +1,14 @@
+<TVSCHEDULE NAME="News">
+        <CHANNEL CHAN="4">
+            <BANNER>News</BANNER>
+            <DAY>
+                <DATE>7 of May</DATE>
+                <HOLIDAY>No</HOLIDAY>
+                <HOLIDAY>Yes</HOLIDAY>
+                <PROGRAMSLOT>
+                    <TIME>8:00 pm</TIME>
+                    <TITLE LANGUAGE="" RATING="">News</TITLE>
+                </PROGRAMSLOT>
+            </DAY>
+        </CHANNEL>
+    </TVSCHEDULE>

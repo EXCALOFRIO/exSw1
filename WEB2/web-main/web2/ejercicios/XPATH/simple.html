@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h1>My First Heading</h1>
+    <h1>My Second Heading</h1>
+
+    <p>My first paragraph.</p>
+
+    <button onclick="myfunction()">Click me to count the number of h1</button>
+    <br>
+    <br>
+    <div id="test"></div>
+    <script>
+        function myfunction() {
+            const paragraphCount = document.evaluate(
+                "count(//h1)",
+                document,
+                null,
+                XPathResult.ANY_TYPE,
+                null
+            );
+            
+            const elem = document.getElementById('test');
+            elem.append("There are " + paragraphCount.numberValue + " h1 elements")
+
+            console.log(paragraphCount.numberValue);
+        };
+
+    </script>
+</body>
+
+</html>

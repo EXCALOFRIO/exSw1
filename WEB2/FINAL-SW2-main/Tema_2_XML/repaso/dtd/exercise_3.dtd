@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!DOCTYPE cateneMontuose[
+<!ELEMENT cateneMontuose (catenaMontuosa*)>
+<!ELEMENT catenaMontuosa (monte+)>
+<!ELEMENT monte (nome, regione?, altezza?)>
+<!ELEMENT nome (#PCDATA)>
+<!ELEMENT regione (#PCDATA)>
+<!ELEMENT altezza (#PCDATA)>
+<!ATTLIST altezza unitaMisura CDATA #REQUIRED>
+]>

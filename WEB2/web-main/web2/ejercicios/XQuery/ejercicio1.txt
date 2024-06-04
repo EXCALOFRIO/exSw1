@@ -1,0 +1,5 @@
+1. Devuelve los títulos de todos los libros ordenados por precio de mayor a menor
+
+2. ¿Cuántos libros ha escrito Abiteboul?
+
+3. Haz un XML que indique para cada autor, cuántos libros ha escrito

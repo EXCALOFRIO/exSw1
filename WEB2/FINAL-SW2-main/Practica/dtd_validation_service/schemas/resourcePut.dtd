@@ -1,0 +1,4 @@
+<!DOCTYPE content [
+    <!ELEMENT content (descripcion)>
+    <!ELEMENT descripcion (#PCDATA)>
+]>

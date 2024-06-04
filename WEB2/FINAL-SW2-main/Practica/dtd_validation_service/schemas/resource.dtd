@@ -1,0 +1,5 @@
+<!DOCTYPE content [
+    <!ELEMENT content (id, descripcion)>
+    <!ELEMENT id (#PCDATA)>
+    <!ELEMENT descripcion (#PCDATA)>
+]>

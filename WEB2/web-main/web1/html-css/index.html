@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Simple HTML page">
+    <meta name="author" content="bereilhp">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DuckDuckGo</title>
+    <link rel="icon" type="image/x-icon" href="./img/favicon.ico"> <!-- Alien favicon -->
+    <link rel="stylesheet" href="./styles.css">
+
+    <style>
+        h2 { color: blue; } 
+
+        #h6-style {
+            color: purple
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        h1.center {
+            font-size: 60px !important;
+        }
+
+        * {
+            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+
+        h1,h2,h4 {
+            text-shadow: 2px 2px red;
+        }
+
+        h1.center { 
+            position: sticky;
+            top: 0;
+
+        }
+    </style> <!-- Internal CSS-->
+
+</head>
+<body>
+    <h1 style="color: red; font-size: 20px;" class="center">DuckDuckGo</h1> <!-- In line-->
+    <h2 class="center">DuckDuckGo</h2>
+    <h3 class="center">DuckDuckGo</h3>
+    <h4 class="center">DuckDuckGo</h4>
+    <h5 class="center">DuckDuckGo</h5>
+    <h6 id="h6-style" class="center">DuckDuckGo</h6>
+    <br>
+
+
+    <h1>What is DuckDuckGo?</h1>
+        
+    <p> 
+        <b>DuckDuckGo</b> is a <i>privacy-focused search engine</i> that <em>doesn't 
+        save your search history and blocks any cookies that monitor and track your online activities.</em> 
+        <strong>You're free to browse the web,</strong> use social media, do online shopping, and much more in anonymity.
+        <small>The search engine launched on September 25, 2008.</small> <u>The name was inspired by the game Duck, Duck, Goose, 
+        to make online privacy simple and accessible for everyone.</u> Over the years, the search engine reached new 
+        levels, registering hundreds of millions of search queries daily to supporting multiple platforms and devices.
+    </p>
+
+    <h3>Other private search engines:</h3>
+    <ol>
+        <li>
+            Qwant
+        </li>
+        <li>
+            YaCy
+        </li>
+        <li>
+            Swisscows
+        </li>
+    </ol>
+
+    <h3>Benefits of using a Private Search Engine:</h3>
+    <ul>
+        <li>
+            Uniform Results - Information As It Is
+        </li>
+        <li>
+            Victim of Data Breach - Ney, NEVER!
+        </li>
+        <li>
+            Security
+        </li>
+        <li>
+            Ad free browsing
+        </li>
+    </ul>
+
+    <h3>Search Engine Slogan Description List</h3>
+    <dl>
+        <dt>
+            DuckDuckGo
+            <dd>
+                Privacy, simplified
+            </dd>
+        </dt>
+        <dt>
+            Qwant
+            <dd>
+                The search engine that doesn't know anything about you, and that changes everything!
+            </dd>
+        </dt>
+    </dl>
+
+    <h3>Logos</h3>
+    <img src="./img/duckduckgo.png" alt="DuckDuckGo Logo" width="200" height="170">
+
+    <h3>Tables</h3>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Available Browsers</th>
+        </tr>
+        <tr>
+            <td>DuckDuckGo</td>
+            <td>All the browsers</td>
+        </tr>
+    </table>
+
+    <h3>Links to get more information</h3>
+    <a href="https://duckduckgo.com/" target="_blank">Try DuckDuckGo!!!</a> <br>
+    <a href="https://help.duckduckgo.com/duckduckgo-help-pages/" target="_blank">DuckDuckGo Help Pages</a>
+
+    <h3>Div and Span</h3>
+    <div>div</div>
+    <div>div</div>
+
+    <span>span</span>
+    <span>span</span>
+
+    <h3>Form</h3>
+    <form id="ans" action="./get.html" method="get">
+        <label form="ans" for="fname">First Name:</label>
+        <input type="text" id="fname" name="First Name" placeholder="Enter First Name" required minlength="2" maxlength="50">
+        <input type="submit" value="Enter">
+    </form>
+
+    <h3>Dropdown</h3>
+    <label for="cars">Cars</label>
+        <select name="cars" id="cars">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+        </select>
+    <br>
+    <br>
+
+    <a href="./post.html">Jump</a> <br>
+    <form action="./post.html">
+        <input type="submit">
+    </form>
+
+</body>
+</html>

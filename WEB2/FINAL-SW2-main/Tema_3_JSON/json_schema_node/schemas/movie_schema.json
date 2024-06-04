@@ -1,0 +1,74 @@
+{
+  "$id": "http://example.com/schemas/movie.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema#",
+  "type": "object",
+  "title": "movie",
+  "description": "Information about a movie",
+  "required": ["title", "plot", "year", "country", "runtime", "genres", "rating", "directors", "actors"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Movie's title"
+    },
+    "year": {
+      "type": "number",
+      "minimum": 1888 ,
+      "description": "Release year"
+    },
+    "plot": {
+      "type": "string",
+      "description": "Brief summary of the movie"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country of origin"
+    },
+    "runtime": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Movie's runtime in minutes"
+    },
+    "genres": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "description": "Movie genre"
+      }
+    },
+    "rating": {
+      "enum": ["G", "M", "PG", "R", "X", "Not Rated"],
+      "description": "MPAA rating of the movie"
+    },
+    "directors": {
+      "type": "array",
+      "description": "Movie directors",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/person" }
+    },
+    "actors": {
+      "type": "array",
+      "description": "Movie actors",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/person" }
+    }
+  },
+  "$defs": {
+    "person": {
+       "type": "object",
+       "description": "Represents a person's information",
+       "required": ["name", "age"],
+       "properties": {
+         "name": {
+           "type": "string",
+           "description": "Actor's name"
+         },
+         "age": {
+           "type": "number",
+           "minimum": 0,
+           "description": "Actor's age"
+         }
+       }
+    }
+  }
+}

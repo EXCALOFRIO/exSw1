@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Scrapiffy</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+
+<body style="background: #27374D">
+  <div class="container mt-4">
+    <h1 class="text-center display-1">Scrapiffy</h1>
+    <p class="text-center" style="color: #DDE6ED">De los creadores de Offerity</p>
+    <br>
+    <div class="d-flex justify-content-start">
+      <select name="recursos" id="recursos">
+        <option value="default">Elegir Recurso</option>
+        <option value="emails">Emails</option>
+        <option value="telefonos">Teléfonos</option>
+      </select>
+
+      <input type="text" id="search-input" class="form-control ml-2" placeholder="Buscar">
+
+      <button onclick="senderRequest()"  type="submit" class="btn btn-secondary ml-2"
+        style="color:#DDE6ED">Enviar</button>
+    </div>
+    <br>
+    <br>
+    <br>
+    <h2 class="display-4" style="color: #9DB2BF" id="respuesta"></h2>
+    <br>
+    <h2 id="res" style="font-size: xx-large;"></h2> 
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="/sendRequest.js"></script>
+<link rel="stylesheet" href="/stylesheets/style.css">
+
+</html>

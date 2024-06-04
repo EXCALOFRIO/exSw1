@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Orderdetails xmlns:xs="http://www.w3.org/2001/XMLSchema"  xs:noNamespaceSchemaLocation = "eje2.xsd">
+    <Customer id="01">
+        <fname from="Name">First Name</fname>
+        <cname>C Name</cname>
+        <destination Country="Spain" Delivdate="14th of February">Madrid</destination>
+        <email>name@example.com</email>
+        <eid>123</eid>
+    </Customer>
+</Orderdetails>

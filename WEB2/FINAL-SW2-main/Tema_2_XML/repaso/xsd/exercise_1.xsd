@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="student">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="firstName" type="xs:string" />
+        <xs:element name="lastName" type="xs:string" />
+        <xs:element name="id" type="xs:integer" />
+        <xs:element name="plan">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="courses">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="course" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="name" type="xs:string" />
+                          <xs:element name="shortName" type="xs:string" />
+                          <xs:element name="record" minOccurs="0">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="grade" type="xs:integer" />
+                                <xs:element name="date" type="xs:string" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="year" type="xs:integer" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
