@@ -38,7 +38,7 @@ git clone https://bitbucket.org/eps-ceu/sw2_2024_repository.git
 
 ### alejandro.ramirezlarena
 
-### 00116317000
+### contraseña 
 
 # exSw1
 
